@@ -1,0 +1,18 @@
+{
+  "_copy_without_render": [
+    ".github/workflows/tests.yml",
+    ".github/workflows/distribute.yml"
+  ],
+  "_output_dir": "/Users/joshrickard/_redcanary",
+  "_template": "https://github.com/MSAdministrator/cookiecutter-hypermodern-python",
+  "author": "Josh Rickard",
+  "copyright_year": "2022",
+  "development_status": "Development Status :: 3 - Alpha",
+  "email": "rickardja@live.com",
+  "friendly_name": "Binocular",
+  "github_user": "MSAdministrator",
+  "license": "MIT",
+  "package_name": "binocular",
+  "project_name": "binocular",
+  "version": "0.0.1"
+}

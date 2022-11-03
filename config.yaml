@@ -1,0 +1,7 @@
+services:
+  virustotal:
+    api_key: <>
+  urlscan:
+    api_key: <>
+  hybridanalysis:
+    api_key: <>

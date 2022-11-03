@@ -21,7 +21,10 @@
 
 ## Features
 
-- TODO
+- Extracts IOCs from a given string
+- TODO:
+    - Lookup iocs in a number of different threat intel providers (e.g. virustotal, urlscanio, etc.)
+    - Returns output in a standard format
 
 ## Requirements
 
@@ -38,6 +41,10 @@ $ pip install binocular
 ## Usage
 
 Please see the [Command-line Reference] for details.
+
+```
+binocular magnify "string"
+```
 
 ## Contributing
 

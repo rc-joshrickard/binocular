@@ -3,10 +3,12 @@
 This Base class inherits from our LoggingBase metaclass and gives us
 shared logging across any class inheriting from Base.
 """
-import re
 import os
+import re
 from pathlib import Path
-from typing import Dict, Union, List
+from typing import Dict
+from typing import List
+from typing import Union
 
 from .utils.logger import LoggingBase
 
@@ -19,12 +21,12 @@ class Base(metaclass=LoggingBase):
         "url": "https?:\\/\\/(?:www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b(?:[-a-zA-Z0-9()@:%_\\+.~#?&\\/=]*)",
         "ipv4": r"^(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$",
         "domain": "[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b(?:[-a-zA-Z0-9()@:%_\\+.~#?&\\/=]*)",
-        "sha256": r'\b[0-9a-f]{64}\b',
+        "sha256": r"\b[0-9a-f]{64}\b",
         "sha1": r"\b[0-9a-f]{40}\b",
         "md5": r"([a-fA-F\d]{32})",
     }
     config_manager = None
-    config = None # This is an empty variable that will contain our configuration values and thus inheritted by other classes for their use.
+    config = None  # This is an empty variable that will contain our configuration values and thus inheritted by other classes for their use.
 
     def _get_absolute_path(self, path: str) -> str:
         try:
@@ -43,7 +45,7 @@ class Base(metaclass=LoggingBase):
             Dict[str, Union[str, List[str]]]: _description_
         """
         return_dict = {}
-        for key,val in self.PATTERNS.items():
+        for key, val in self.PATTERNS.items():
             matches = re.findall(val, value)
             if matches:
                 if key not in return_dict:

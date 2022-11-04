@@ -15,13 +15,13 @@ class VT(Base):
             self.client = vt.Client(self.config.get("virustotal"))
 
     def url(self, url: str) -> Dict[str, str]:
-        """_summary_
+        """Searching URl on VirusTotal.
 
         Args:
-            url (str): _description_
+            url (str): The url to search VT for.
 
         Returns:
-            Dict[str, str]: _description_
+            Dict[str, str]: The results from our search.
         """
         return_dict = {}
         url_id = vt.url_id(url)

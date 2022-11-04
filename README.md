@@ -65,6 +65,12 @@ binocular magnify "string"
 Contributions are very welcome.
 To learn more, see the [Contributor Guide].
 
+You can run all the pre-commit hooks by running 
+
+```
+poetry run pre-commit run --all-files
+```
+
 ## License
 
 Distributed under the terms of the [MIT license][license],

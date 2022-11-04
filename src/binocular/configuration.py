@@ -1,11 +1,15 @@
 """Configuration file."""
 import json
 import os
-from typing import AnyStr, Dict
 from string import Template
+from typing import AnyStr
+from typing import Dict
 
 import yaml
-from attrs import asdict, define, field, fields
+from attrs import asdict
+from attrs import define
+from attrs import field
+from attrs import fields
 from prompt_toolkit import PromptSession
 
 from .base import Base
@@ -14,6 +18,7 @@ from .base import Base
 @define
 class Configuration:
     """The main configuration data model."""
+
     virustotal: AnyStr = field(factory=str, metadata={"question": Template("Please provide your VirusTotal API key: ")})
     urlscanio: AnyStr = field(factory=str, metadata={"question": Template("Please provide your urlscan.io API key: ")})
 
@@ -38,10 +43,12 @@ class ConfigurationManager(Base):
         Returns:
             Dict[str, str]: A dictionary of the provided answers to our configuration questions.
         """
-        return asdict(Configuration(
-            virustotal=self.session.prompt(fields(Configuration).virustotal.metadata["question"].substitute()),
-            urlscanio=self.session.prompt(fields(Configuration).urlscanio.metadata["question"].substitute()),
-        ))
+        return asdict(
+            Configuration(
+                virustotal=self.session.prompt(fields(Configuration).virustotal.metadata["question"].substitute()),
+                urlscanio=self.session.prompt(fields(Configuration).urlscanio.metadata["question"].substitute()),
+            )
+        )
 
     def _read_from_disk(self, path: str) -> Dict[str, str]:
         """Retreives the configuration file values from a given path on the disk.
@@ -89,7 +96,7 @@ class ConfigurationManager(Base):
                 except Exception as e:
                     message = f"Attempted to create the provided directories '{path}' but was unable to."
                     self.__logger.critical(message + e)
-                    raise Exception(message)
+                    raise e
             with open(path, "w+") as f:
                 if path.endswith(".json"):
                     json.dump(data, f)
@@ -98,4 +105,4 @@ class ConfigurationManager(Base):
                 else:
                     raise FileNotFoundError(f"The provided path value '{path}' is not one of '.yml'.")
         except IsADirectoryError as ie:
-            raise IsADirectoryError(f"The provided path is a directory: {path}")
+            raise ie

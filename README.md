@@ -21,10 +21,15 @@
 
 ## Features
 
+This project aims to provide a singlur way for detection engineers to research and identify if any number of indicators are known by both threat intelligence and customers.
+
+## Current Features
+
 - Extracts IOCs from a given string
-- TODO:
-    - Lookup iocs in a number of different threat intel providers (e.g. virustotal, urlscanio, etc.)
-    - Returns output in a standard format
+- Create or update configuration file containing secret API keys
+    - Default path is `~/.config/binocular.yml`
+- Lookup URLs in VirusTotal and urlscan.io
+- Lookup domains, md5, sha1, and sha256 hashes in VirusTotal
 
 ## Requirements
 
@@ -36,6 +41,15 @@ You can install _Binocular_ via [pip] from [PyPI]:
 
 ```console
 $ pip install binocular
+```
+
+It is preferred that you use `poetry` when developing `binocular`.
+
+```
+poetry install
+poetry run binocular magnify "some string"
+poetry run binocular get_config
+poetry run binocular update_config
 ```
 
 ## Usage

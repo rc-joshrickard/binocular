@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "binocular"
-version = "0.0.1"
+version = "0.1.0"
 description = "Binocular"
 authors = ["Josh Rickard <rickardja@live.com>"]
 license = "MIT"

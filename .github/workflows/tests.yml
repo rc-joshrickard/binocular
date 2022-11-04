@@ -43,8 +43,9 @@ jobs:
           poetry --version
       - name: Install Nox
         run: |
-          pipx install --pip-args=--constraint=.github/workflows/constraints.txt nox
-          pipx inject --pip-args=--constraint=.github/workflows/constraints.txt nox nox-poetry
+          pip install nox
+          pip install nox-poetry
+          
           nox --version
       - name: Compute pre-commit cache key
         if: matrix.session == 'pre-commit'

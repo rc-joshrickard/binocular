@@ -6,6 +6,7 @@ shared logging across any class inheriting from Base.
 import os
 import re
 from pathlib import Path
+from typing import AnyStr
 from typing import Dict
 from typing import List
 from typing import Union
@@ -28,7 +29,15 @@ class Base(metaclass=LoggingBase):
     config_manager = None
     config = None  # This is an empty variable that will contain our configuration values and thus inheritted by other classes for their use.
 
-    def _get_absolute_path(self, path: str) -> str:
+    def _get_absolute_path(self, path: str) -> AnyStr:
+        """Extracts the absolute path from a given string path.
+
+        Args:
+            path (str): The path to get the absolute path from.
+
+        Returns:
+            AnyStr: The full absolute path of a value.
+        """
         try:
             if Path(path):
                 return os.path.abspath(os.path.expanduser(os.path.expandvars(path)))
@@ -44,7 +53,7 @@ class Base(metaclass=LoggingBase):
         Returns:
             Dict[str, Union[str, List[str]]]: _description_
         """
-        return_dict = {}
+        return_dict: Dict[str, Union[str, List[str]]] = {}
         for key, val in self.PATTERNS.items():
             matches = re.findall(val, value)
             if matches:

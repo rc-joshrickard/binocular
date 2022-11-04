@@ -55,6 +55,9 @@ myst-parser = {version = ">=0.16.1"}
 [tool.poetry.scripts]
 binocular = "binocular.__main__:main"
 
+[tool.poetry.group.dev.dependencies]
+urllib3 = "1.26.12"
+
 [tool.coverage.paths]
 source = ["src", "*/site-packages"]
 tests = ["tests", "*/tests"]

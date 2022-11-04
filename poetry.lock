@@ -620,6 +620,14 @@ python-versions = ">=3.7"
 flake8 = ">=3.9.1"
 
 [[package]]
+name = "pip"
+version = "22.3"
+description = "The PyPA recommended tool for installing Python packages."
+category = "dev"
+optional = false
+python-versions = ">=3.7"
+
+[[package]]
 name = "platformdirs"
 version = "2.5.2"
 description = "A small Python module for determining appropriate platform-specific dirs, e.g. a \"user data dir\"."
@@ -1220,7 +1228,7 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "c2c72d1bfedc09126c9faabae14a58492a65ea1364cf5aa8bcb0b572d3033ab7"
+content-hash = "8201e7ed71c9397822cd43b4048fcad880977aec0db21aca5127643a0d9a7854"
 
 [metadata.files]
 aiofiles = [
@@ -1758,6 +1766,10 @@ pbr = [
 pep8-naming = [
     {file = "pep8-naming-0.13.2.tar.gz", hash = "sha256:93eef62f525fd12a6f8c98f4dcc17fa70baae2f37fa1f73bec00e3e44392fa48"},
     {file = "pep8_naming-0.13.2-py3-none-any.whl", hash = "sha256:59e29e55c478db69cffbe14ab24b5bd2cd615c0413edf790d47d3fb7ba9a4e23"},
+]
+pip = [
+    {file = "pip-22.3-py3-none-any.whl", hash = "sha256:1daab4b8d3b97d1d763caeb01a4640a2250a0ea899e257b1e44b9eded91e15ab"},
+    {file = "pip-22.3.tar.gz", hash = "sha256:8182aec21dad6c0a49a2a3d121a87cd524b950e0b6092b181625f07ebdde7530"},
 ]
 platformdirs = [
     {file = "platformdirs-2.5.2-py3-none-any.whl", hash = "sha256:027d8e83a2d7de06bbac4e5ef7e023c02b863d7ea5d079477e722bb41ab25788"},

@@ -39,13 +39,11 @@ jobs:
       - name: Install Poetry
         run: |
           pip install poetry
-          
           poetry --version
       - name: Install Nox
         run: |
           pip install nox
           pip install nox-poetry
-          
           nox --version
       - name: Compute pre-commit cache key
         if: matrix.session == 'pre-commit'

@@ -6,30 +6,26 @@
 [![License](https://img.shields.io/pypi/l/binocular)][license]
 
 [![Read the documentation at https://binocular.readthedocs.io/](https://img.shields.io/readthedocs/binocular/latest.svg?label=Read%20the%20Docs)][read the docs]
-[![Tests](https://github.com/MSAdministrator/binocular/workflows/Tests/badge.svg)][tests]
-[![Codecov](https://codecov.io/gh/MSAdministrator/binocular/branch/main/graph/badge.svg)][codecov]
+[![Tests](https://github.com/redcanaryco/binocular/workflows/Tests/badge.svg)][tests]
+[![Codecov](https://codecov.io/gh/redcanaryco/binocular/branch/main/graph/badge.svg)][codecov]
 
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)][pre-commit]
 [![Black](https://img.shields.io/badge/code%20style-black-000000.svg)][black]
 
 [pypi status]: https://pypi.org/project/binocular/
 [read the docs]: https://binocular.readthedocs.io/
-[tests]: https://github.com/MSAdministrator/binocular/actions?workflow=Tests
-[codecov]: https://app.codecov.io/gh/MSAdministrator/binocular
+[tests]: https://github.com/redcanaryco/binocular/actions?workflow=Tests
+[codecov]: https://app.codecov.io/gh/redcanaryco/binocular
 [pre-commit]: https://github.com/pre-commit/pre-commit
 [black]: https://github.com/psf/black
 
 ## Features
 
-This project aims to provide a singlur way for detection engineers to research and identify if any number of indicators are known by both threat intelligence and customers.
+- Checks wether or not Docker is installed, setup and running.
+- Builds and runs Docker containers for each service using Python.
+- Currently supported Docker containers are
+    - VirusTotal
 
-## Current Features
-
-- Extracts IOCs from a given string
-- Create or update configuration file containing secret API keys
-    - Default path is `~/.config/binocular.yml`
-- Lookup URLs in VirusTotal and urlscan.io
-- Lookup domains, md5, sha1, and sha256 hashes in VirusTotal
 
 ## Requirements
 
@@ -43,33 +39,14 @@ You can install _Binocular_ via [pip] from [PyPI]:
 $ pip install binocular
 ```
 
-It is preferred that you use `poetry` when developing `binocular`.
-
-```
-poetry install
-poetry run binocular magnify "some string"
-poetry run binocular get_config
-poetry run binocular update_config
-```
-
 ## Usage
 
 Please see the [Command-line Reference] for details.
-
-```
-binocular magnify "string"
-```
 
 ## Contributing
 
 Contributions are very welcome.
 To learn more, see the [Contributor Guide].
-
-You can run all the pre-commit hooks by running
-
-```
-poetry run pre-commit run --all-files
-```
 
 ## License
 
@@ -92,11 +69,11 @@ This project was generated from [@MSAdministrator]'s [Hypermodern Python Cookiec
 [@MSAdministrator]: https://github.com/MSAdministrator
 [pypi]: https://pypi.org/
 [hypermodern python cookiecutter]: https://github.com/cjolowicz/cookiecutter-hypermodern-python
-[file an issue]: https://github.com/MSAdministrator/binocular/issues
+[file an issue]: https://github.com/redcanaryco/binocular/issues
 [pip]: https://pip.pypa.io/
 
 <!-- github-only -->
 
-[license]: https://github.com/MSAdministrator/binocular/blob/main/LICENSE
-[contributor guide]: https://github.com/MSAdministrator/binocular/blob/main/CONTRIBUTING.md
+[license]: https://github.com/redcanaryco/binocular/blob/main/LICENSE
+[contributor guide]: https://github.com/redcanaryco/binocular/blob/main/CONTRIBUTING.md
 [command-line reference]: https://binocular.readthedocs.io/en/latest/usage.html

@@ -2,29 +2,23 @@
 name = "binocular"
 version = "0.0.1"
 description = "Binocular"
-authors = ["Josh Rickard <rickardja@live.com>"]
+authors = ["Josh Rickard <josh.rickard@redcanary.com>"]
 license = "MIT"
 readme = "README.md"
-homepage = "https://github.com/MSAdministrator/binocular"
-repository = "https://github.com/MSAdministrator/binocular"
+homepage = "https://github.com/redcanaryco/binocular"
+repository = "https://github.com/redcanaryco/binocular"
 documentation = "https://binocular.readthedocs.io"
 classifiers = [
-    "Development Status :: 3 - Alpha",
+    "Development Status :: 2 - Pre-Alpha",
 ]
 
 [tool.poetry.urls]
-Changelog = "https://github.com/MSAdministrator/binocular/releases"
+Changelog = "https://github.com/redcanaryco/binocular/releases"
 
 [tool.poetry.dependencies]
-python = "^3.10"
+python = "^3.7"
 click = ">=8.0.1"
-vt-py = "^0.17.1"
-urlscanio = "^0.2.2"
-requests = "^2.28.1"
-pyyaml = "^6.0"
-fire = "^0.4.0"
-attrs = "^22.1.0"
-prompt-toolkit = "^3.0.32"
+docker = "^6.0.1"
 
 [tool.poetry.dev-dependencies]
 Pygments = ">=2.10.0"
@@ -54,11 +48,6 @@ myst-parser = {version = ">=0.16.1"}
 
 [tool.poetry.scripts]
 binocular = "binocular.__main__:main"
-
-[tool.poetry.group.dev.dependencies]
-urllib3 = "1.26.12"
-setuptools = "^65.5.1"
-pip = "^22.3"
 
 [tool.coverage.paths]
 source = ["src", "*/site-packages"]
@@ -94,5 +83,5 @@ show_error_codes = true
 show_error_context = true
 
 [build-system]
-requires = ["poetry-core>=1.2.2"]
+requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"

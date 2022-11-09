@@ -10,3 +10,6 @@
 __pycache__/
 
 test.py
+errors.log
+info.log
+warnings.log

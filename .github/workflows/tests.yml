@@ -123,8 +123,7 @@ jobs:
           poetry --version
       - name: Install Nox
         run: |
-          pip install nox
-          pip install nox-poetry
+          pip install nox nox-poetry
           nox --version
       - name: Run Nox
         run: |
@@ -164,8 +163,7 @@ jobs:
           poetry --version
       - name: Install Nox
         run: |
-          pip install nox
-          pip install nox-poetry
+          pip install nox nox-poetry
           nox --version
       - name: Download coverage data
         uses: actions/download-artifact@v3

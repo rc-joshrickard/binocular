@@ -1,24 +1,43 @@
-"""Main entrypoint for CLI and the rest of the project."""
+"""The main entry point for this package."""
 from typing import Dict
+
+import docker
 
 from .base import Base
 from .configuration import ConfigurationManager
-from .services.urlscan import UrlScanIo
-from .services.vt import VT
 
 
 class Binocular(Base):
-    """Main class and entry point for project."""
+    """Named after the package and is consider the main entrypoint for this package.
+    
+    All commandline arguments will flow through this class. These will be defined as
+    properties, methods and derived classes.
+    """
 
     def __init__(self) -> None:
-        """Checks and determins if configuration file exists or not."""
+        """Main entry point, including pre-flight checks.
+        
+        We check to ensure Docker is installed before continuing.
+        If it is not, we provide guidance and exit.
+        """
+        # First check for configuration file 
         Base.config_manager = ConfigurationManager()
         if not Base.config:
             self.get_config()
-        self.SERVICE_MAP = {
-            "virustotal": {"url": VT().url, "md5": VT().md5, "sha1": VT().sha1, "sha256": VT().sha256},
-            "urlscanio": {"url": UrlScanIo().url},
-        }
+ 
+        # next we check for docker
+        if not self._check_if_docker_is_installed():
+            self.__logger.critical(
+                "You must have Docker, Docker Desktop or some variant installed before continuing."
+                "Before you can continue, you must have Docker installed. Visit https://docker.com"
+                " for more information."
+            )
+        Base.docker_client = docker.from_env()
+        self._build_image(name="builder", tag="binocular.builder")
+
+        from .services.portalconfig import PortalConfig
+
+        print(PortalConfig())
 
     def get_config(self) -> Dict[str, str]:
         """Returns the current configuration file values.
@@ -38,27 +57,42 @@ class Binocular(Base):
         Base.config_manager._save_to_disk(path=Base.config_manager.config_path, data=Base.config_manager._prompt())
         return self.get_config()
 
-    def magnify(self, value: str) -> Dict[str, str]:
-        """Returns results from 1 or more threat intelligence providers.
-
-        Args:
-            value (str): A string that is parsed for IOCs and passed into each service provider.
-
-        Returns:
-            Dict[str, str]: The results for each IOC identified.
-        """
+    def run(self, value: str) -> None:
         return_dict = {}
         iocs = self._get_ioc_type(value=value)
         config = self.get_config()
-        for key, _val in config.items():
-            if self.SERVICE_MAP.get(key):
-                for k, v in iocs.items():
-                    if self.SERVICE_MAP[key].get(k):
-                        if isinstance(v, list):
-                            for item in v:
-                                if item not in return_dict:
-                                    return_dict[item] = {}
-                                if key not in return_dict[item]:
-                                    return_dict[item][key] = []
-                                return_dict[item][key].append(self.SERVICE_MAP[key][k](item))
-        return return_dict
+        for service in self.config["services"]:
+            for key,val in self.config["services"][service].items():
+                if key == "supported_indicators":
+                    for ioc_type, ioc_val in iocs.items():
+                        if ioc_type in val:
+                            if ioc_val not in return_dict:
+                                return_dict[ioc_val] = {}
+                           # if service not in return_dict[ioc_val]:
+                            #    return_dict[ioc_val][service] = 
+                            return_dict[ioc_val].append()
+          #      for 
+        # for key, _val in config.items():
+        #     if self.SERVICE_MAP.get(key):
+        #         for k, v in iocs.items():
+        #             if self.SERVICE_MAP[key].get(k):
+        #                 if isinstance(v, list):
+        #                     for item in v:
+        #                         if item not in return_dict:
+        #                             return_dict[item] = {}
+        #                         if key not in return_dict[item]:
+        #                             return_dict[item][key] = []
+        #                         return_dict[item][key].append(self.SERVICE_MAP[key][k](item))
+        # return return_dict
+
+        for service in self.config.get("services"):
+            if service == "virustotal":
+                from .services.virustotal import VirusTotal
+
+              #  response = VirusTotal(api_key=self.config["services"][service].get("api_key")).run(indicator=)
+
+        from .services.virustotal import VirusTotal
+
+        resp = VirusTotal().run()
+        print(resp)
+        pass

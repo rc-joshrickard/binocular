@@ -4,6 +4,7 @@ import os
 from string import Template
 from typing import AnyStr
 from typing import Dict
+from typing import List
 
 import yaml
 from attrs import asdict
@@ -16,11 +17,41 @@ from .base import Base
 
 
 @define
+class ServiceConfiguration:
+    """Inidividual service configuration options per indicator type."""
+
+    name: AnyStr = field(factory=str)
+    supported_indicators: List = field(factory=list)
+    api_key: AnyStr = field(factory=str, metadata={"question": Template("Please provide your $servicename API key: ")})
+
+
+@define
+class InternalConfiguration:
+    """Sets the internal configuration options for RC employees."""
+
+    portal_key: AnyStr = field(factory=str)
+    portal_cert_path: AnyStr = field(factory=str)
+    portal_cert_key_path: AnyStr = field(factory=str)
+    ca_cert_path: AnyStr = field(factory=str)
+    excluded_customer_list: List = field(factory=list)
+
+
+@define
 class Configuration:
     """The main configuration data model."""
 
-    virustotal: AnyStr = field(factory=str, metadata={"question": Template("Please provide your VirusTotal API key: ")})
-    urlscanio: AnyStr = field(factory=str, metadata={"question": Template("Please provide your urlscan.io API key: ")})
+    services: List[ServiceConfiguration] = field(factory=list)
+    internal: InternalConfiguration = field(factory=InternalConfiguration)
+
+    def __attrs_post_init__(self):
+        if self.services:
+            return_list = []
+            for item in self.services:
+                return_list.append(ServiceConfiguration(**item))
+            self.services = return_list
+
+        if self.internal:
+            self.internal = InternalConfiguration(**self.internal)
 
 
 class ConfigurationManager(Base):
@@ -43,6 +74,8 @@ class ConfigurationManager(Base):
         Returns:
             Dict[str, str]: A dictionary of the provided answers to our configuration questions.
         """
+        return_list = []
+
         return asdict(
             Configuration(
                 virustotal=self.session.prompt(fields(Configuration).virustotal.metadata["question"].substitute()),

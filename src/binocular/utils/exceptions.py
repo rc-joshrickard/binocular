@@ -1,5 +1,4 @@
-"""binocular.utils.exceptions."""
-
+"""binocular.utils.exceptions"""
 
 class CustomExceptionError(Exception):
     """Raised when an error is encountered."""

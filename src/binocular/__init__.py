@@ -1,5 +1,5 @@
 """Binocular."""
-from .configuration import ConfigurationManager
+from .binocular import Binocular
 
 
-__all__ = ["ConfigurationManager"]
+__all__ = ["Binocular"]
